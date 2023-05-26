@@ -1,17 +1,14 @@
-import models
-from models.user import User
-from models.post import Post
-from models.like import Likes
-from models.comment import Comment
-from models.image import Image
-from models.video import Video
-from models.document import Document
+from ..user import User
+from ..post import Post
+from ..like import Like
+from ..comment import Comment
+from ..image import Image
+from ..video import Video
 from os import getenv
-import sqlalchemy
-import sqlalchemy import create_engine
+from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-classes = {"User": User, "Post": Post, "Likes": Likes, "Comment": Comment, "Image": Image, "Video": Video, "Document": Document}
+classes = {"User": User, "Post": Post, "Likes": Like, "Comment": Comment, "Image": Image, "Video": Video}
 
 class DBStorage:
     """interacts with the MySQL database"""
@@ -28,18 +25,17 @@ class DBStorage:
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".format(CS_MYSQL_USER, CS_MYSQL_PWD, CS_MYSQL_HOST, CS_MYSQL_DB))
 
         if CS_ENV == "test":
+            from ..base_model import Base
             Base.metadata.drop_all(self.__engine)
 
-    def all(self, cls=None):
+    def all(self, cls):
         """query on the current database session"""
-        new_dict = {}
-        for clss in classes:
-            if cls is None or cls is classes[clss] or cls is clss:
-                objs = self.__session.query(classes[clss]).all()
-                for obj in objs:
-                    key = obj.__class__.__name__ + "." + obj.id
-                    new_dict[key] = obj
-            return (new_dict)
+
+        if cls in classes.keys():
+            objs = self.__session.query(classes[cls]).all()
+        elif cls in classes.values():
+            objs = self.__session.query(cls).all()
+        return objs
         
     def new(self, obj):
         """add the object to the current database session"""
@@ -56,7 +52,8 @@ class DBStorage:
 
     def reload(self):
         """reload data from the database"""
-        Base.matedate.create_all(self.__engine)
+        from ..base_model import Base
+        Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
@@ -69,26 +66,10 @@ class DBStorage:
         """Return the oject based on th call name and its ID, or None if not found"""
         if cls not in classes.values():
             return None
-        
-        all_cls = models.storage.all(cls)
-        for value in all_cls.values():
-            if (value.id == id):
-                return value
-            
-        return None
+        return self.__session.get(cls, id)
     
-    def count(self, cls=None):
+    def count(self, cls):
         """
         count the number of object in storage
         """
-        all_class = classes.values()
-
-        if not cls:
-            count = 0
-            for clas in all_class:
-                count += len(models.storage.all(clas).values())
-        else:
-            count = len(models.storage.all(cls).values())
-
-        return count
-
+        return self.__session.query(cls).count()

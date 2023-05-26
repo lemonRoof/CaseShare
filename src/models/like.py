@@ -1,21 +1,10 @@
-import models
-from models.base_model import BaseModel, Base
-from os import getenv
-import sqlalchemy
-from sqlalchemy  import Column, Integer, ForeignKey
-from sqlalchemy.orm import relationship
+from .base_model import BaseModel, Base
+from sqlalchemy  import Column, String, ForeignKey
 
 class Like(BaseModel, Base):
     """Representation of city"""
-    if models.storage_t == "db":
-        __tablename__ = "likes"
-        user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-        post_id = Column(Integer, ForeignKey("posts.id"), nullable=False)
 
-    else:
-        user_id = ""
-        post = ""
+    __tablename__ = "likes"
+    user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
+    post_id = Column(String(60), ForeignKey("posts.id"), nullable=False)
 
-    def __init__(self, *agrs, **kwargs):
-        """initializes like"""
-        super().__init__(*agrs, **kwargs)
