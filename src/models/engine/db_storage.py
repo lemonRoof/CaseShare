@@ -1,6 +1,7 @@
 from ..user import User
 from ..post import Post
 from ..like import Like
+from ..document import Document
 from ..comment import Comment
 from ..image import Image
 from ..video import Video
@@ -8,7 +9,7 @@ from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-classes = {"User": User, "Post": Post, "Likes": Like, "Comment": Comment, "Image": Image, "Video": Video}
+classes = {"User": User, "Post": Post, "Like": Like, "Comment": Comment, "Image": Image, "Video": Video, "Document": Document}
 
 class DBStorage:
     """interacts with the MySQL database"""
@@ -31,6 +32,7 @@ class DBStorage:
     def all(self, cls):
         """query on the current database session"""
 
+        objs = []
         if cls in classes.keys():
             objs = self.__session.query(classes[cls]).all()
         elif cls in classes.values():
@@ -68,6 +70,10 @@ class DBStorage:
             return None
         return self.__session.get(cls, id)
     
+    def get_user_by_email(self, email):
+        """Get a user by their email address"""
+        return self.__session.query(User).filter_by(email=email)
+
     def count(self, cls):
         """
         count the number of object in storage
