@@ -72,10 +72,12 @@ class DBStorage:
     
     def get_user_by_email(self, email):
         """Get a user by their email address"""
-        return self.__session.query(User).filter_by(email=email)
+        return self.__session.query(User).filter(User.email==email).first()
 
     def count(self, cls):
         """
         count the number of object in storage
         """
-        return self.__session.query(cls).count()
+        if cls in classes.values():
+            return self.__session.query(cls).count()
+        return 0

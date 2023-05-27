@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Test if CRUD operations with a mysql database are working"""
 import MySQLdb
+import faker
 import unittest
 from models.engine.db_storage import DBStorage
 from models.user import User
@@ -143,6 +144,20 @@ class TestEngine(unittest.TestCase):
         storage.new(user1)
         storage.new(user2)
         storage.save()
-        n = storage.count(str)
+        n = storage.count(int)
         self.assertIsInstance(n, int)
         self.assertEqual(n, 0)
+
+    def test_get_user_by_email(self):
+        fake = faker.Faker()
+        user1 = User(email=fake.email(), password=fake.password(),
+                     first_name=fake.first_name(), last_name=fake.last_name())
+        user2 = User(email=fake.email(), password=fake.password(),
+                     first_name=fake.first_name(), last_name=fake.last_name())
+        storage.new(user1)
+        storage.new(user2)
+        storage.save()
+        user = storage.get_user_by_email(user1.email)
+        self.assertIsInstance(user, User)
+        self.assertEqual(user.id, user1.id)
+        self.assertNotEqual(user.id, user2.id)
