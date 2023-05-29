@@ -1,0 +1,19 @@
+  logs in a user if they already have an account
+  ---
+  tags:
+    - Users
+  parameters:
+    - name: Log in a user
+      in: body
+      required: true
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+  responses:
+    200:
+      description: The login is a success.
+    400:
+      description: Missing email/password or Not a JSON

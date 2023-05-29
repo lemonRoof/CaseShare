@@ -1,0 +1,42 @@
+  Update a user's own account in the database
+  ---
+  tags:
+    - Users
+  parameters:
+    - name: x-token
+      in: header
+      schema:
+        type: string
+        format: jwt
+        required: true
+    - name: data
+      in: body
+      schema:
+        $ref: '#definitions/info'
+
+  definitions:
+    info:
+      properties:
+      email:
+        type: string
+        required: false
+      first_name:
+        type: string
+        required: false
+      last_name:
+        type: string
+        required: false
+      title:
+        type: string
+        required: false
+      phone:
+        type: string
+        required: false
+  
+  responses:
+    200:
+      description: The user profile is successfully changed
+    400:
+      description: The data you are sending is not a JSON format
+    404:
+      description: The user object you are trying to edit does not exist

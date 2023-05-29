@@ -1,0 +1,34 @@
+Create a new user of our social app
+---
+tags:
+  - Users
+parameters:
+  - name: Personal information
+    in: body
+    required: true
+    schema:
+      $ref: '#definitions/user'
+
+definitions:
+  user:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      age:
+        type: number
+      title:
+        type: string
+      phone:
+        type: string
+
+responses:
+  201:
+    description: New user is created!
+  400:
+    description: Some information is missing/ Not a JSON
