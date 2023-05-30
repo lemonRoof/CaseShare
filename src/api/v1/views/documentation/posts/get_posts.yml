@@ -1,0 +1,7 @@
+  get all posts in the database
+  ---
+  tags:
+    - Posts
+  responses:
+    200:
+      description: Posts successfully returned as a list of objects

@@ -1,0 +1,17 @@
+  get one post in details
+  ---
+  tags:
+    - Posts
+  parameters:
+    - name: id
+      in: path
+      properties:
+        type: string
+        format: uuid
+        required: true
+
+  responses:
+    200:
+      description: Post object successfully returned
+    404:
+      description: Post object not found

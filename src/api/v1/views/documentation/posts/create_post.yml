@@ -1,0 +1,35 @@
+  Create a new post into the database
+  ---
+  tags:
+    - Posts
+  parameters:
+    - name: x-token
+      in: header
+      schema:
+        type: string
+        format: jwt
+        required: true
+    - name: data
+      in: body
+      schema:
+        $ref: '#definitions/info'
+
+  definitions:
+    info:
+      properties:
+      title:
+        type: string
+        required: true
+      content:
+        type: string
+        required: true
+
+  responses:
+    201:
+      description: A new post is saved to the database and object is returned
+    400:
+      description: The data you are sending is not a JSON format
+    404:
+      description: The user is invalid
+    403:
+      description: The token is invalid

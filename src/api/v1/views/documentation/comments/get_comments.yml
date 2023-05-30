@@ -1,0 +1,16 @@
+  get all comments for a post
+  ---
+  tags:
+    - Comments
+
+  parameters:
+    - name: post ID
+      in: path
+      properties:
+        - name: post_id
+          type: string
+          format: uuid
+          required: true
+  responses:
+    200:
+      description: Users successfully returned as a list of objects

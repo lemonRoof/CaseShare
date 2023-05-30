@@ -8,8 +8,10 @@ from api.v1.views import api_views
 from models.user import User
 from models.post import Post
 from models import storage
+from flasgger import swag_from
 
 @api_views.get('/posts', strict_slashes=False)
+@swag_from('documentation/posts/get_posts.yml', methods=['GET'])
 def get_posts():
     """Get all posts in the database."""
     posts =  storage.all(Post)
@@ -19,6 +21,7 @@ def get_posts():
         pass
 
 @api_views.get('/posts/<string:id>', strict_slashes=False)
+@swag_from('documentation/posts/get_one_post.yml', methods=['GET'])
 def get_post(id):
     post = storage.get(Post, id)
     try:
@@ -27,6 +30,7 @@ def get_post(id):
         return jsonify({'error': 'Not Found'}), 404
 
 @api_views.get('/users/<string:id>/posts', strict_slashes=False)
+@swag_from('documentation/posts/get_posts_by_user.yml', methods=['GET'])
 @token_required
 def get_posts_by_user(email, id):
     user = storage.get(User, id)
@@ -37,6 +41,7 @@ def get_posts_by_user(email, id):
         return jsonify({'error': 'Not Found'}), 404
 
 @api_views.post('/posts', strict_slashes=False)
+@swag_from('documentation/posts/create_post.yml', methods=['POST'])
 @token_required
 def post_something(email):
     try:
@@ -55,6 +60,7 @@ def post_something(email):
         return jsonify({'error': 'Not a JSON'}), 400
 
 @api_views.put('/posts/<string:id>', strict_slashes=False)
+@swag_from('documentation/posts/update_post.yml', methods=['PUT'])
 @token_required
 def edit_post(email, id):
     """Edit the published content"""

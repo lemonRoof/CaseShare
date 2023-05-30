@@ -1,7 +1,7 @@
-  get a profile of another user
+  Get all posts be a given user
   ---
   tags:
-    - Users
+    - Posts
   parameters:
     - name: x-token
       in: header
@@ -9,15 +9,16 @@
         type: string
         format: jwt
         required: true
-    - name: id
+    - name: user_id
       in: path
       properties:
         type: string
         format: uuid
-        required: true
 
   responses:
     200:
-      description: User successfully returned
+      description: A new post is saved to the database and object is returned
     404:
-      description: User object not found
+      description: The user is invalid
+    403:
+      description: The token is invalid

@@ -7,8 +7,10 @@ from models.comment import Comment
 from models.post import Post
 from api.v1.views.decorators import token_required
 from models import storage
+from flasgger import swag_from
 
 @api_views.get('/posts/<string:id>/comments', strict_slashes=False)
+@swag_from('documentation/comments/get_comments.yml', methods=['GET'])
 def get_comments(id):
     """Get all comments related to a post"""
     post = storage.get(Post, id)
@@ -19,6 +21,7 @@ def get_comments(id):
         return jsonify({'error': 'Not Found'}), 404
     
 @api_views.get('/comments/<string:id>', strict_slashes=False)
+@swag_from('documentation/comments/get_one_comment.yml', methods=['GET'])
 def get_comment(id):
     """Get a single comment and display it"""
     comment = storage.get(Comment, id)
@@ -28,6 +31,7 @@ def get_comment(id):
         return jsonify({'error': 'Not Found'}), 404
 
 @api_views.post('/posts/<string:post_id>/comments', strict_slashes=False)
+@swag_from('documentation/comments/create_comment.yml', methods=['POST'])
 @token_required
 def post_comment(email, post_id):
     """Post a new comment to a post"""
@@ -46,6 +50,7 @@ def post_comment(email, post_id):
         return jsonify({'error': 'Not a JSON'}), 400
 
 @api_views.put('/comments/<string:id>', strict_slashes=False)
+@swag_from('documentation/comments/update_comment.yml', methods=['PUT'])
 @token_required
 def update_comment(email, id):
     """Update a comment"""
