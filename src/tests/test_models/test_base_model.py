@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Test all the base functions defined in models.basemodel"""
 import unittest
-from models.base_model import BaseModel
+#from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
