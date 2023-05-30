@@ -4,13 +4,14 @@ from datetime import datetime
 from flask import jsonify, request
 from api.v1.views import api_views
 from models.comment import Comment
+from models.post import Post
 from api.v1.views.decorators import token_required
 from models import storage
 
 @api_views.get('/posts/<string:id>/comments', strict_slashes=False)
 def get_comments(id):
     """Get all comments related to a post"""
-    post = storage.get("Post", id)
+    post = storage.get(Post, id)
     try:
         comments = post.comments
         return jsonify([comment.to_dict() for comment in comments]), 200
@@ -20,7 +21,7 @@ def get_comments(id):
 @api_views.get('/comments/<string:id>', strict_slashes=False)
 def get_comment(id):
     """Get a single comment and display it"""
-    comment = storage.get("Comment", id)
+    comment = storage.get(Comment, id)
     try:
         return jsonify(comment.to_dict()), 200
     except AttributeError:
@@ -52,7 +53,7 @@ def update_comment(email, id):
         data = request.get_json()
         comment = storage.get(Comment, id)
         user = storage.get_user_by_email(email)
-        if comment.user == user:
+        if comment.user_id == user.id:
             content = data['content']
             comment.content = content
             comment.updated_at = datetime.now()
@@ -71,15 +72,16 @@ def update_comment(email, id):
         # The data passed is not a valid JSON, or other reason
         return jsonify({'error': 'Not a JSON'}), 400
     
-@api_views.delete({'/comments/<string:id>'})
+@api_views.delete('/comments/<string:id>')
 @token_required
 def delete_comment(email, id):
     """Delete a comment"""
     try:
         user = storage.get_user_by_email(email)
         comment = storage.get(Comment, id)
-        if comment.user == user:
-            comment.delete()
+        if comment.user_id == user.id:
+            storage.delete(comment)
+            storage.save()
             return jsonify({}), 204
     except AttributeError:
         return jsonify({'error': 'Not Found'}), 404

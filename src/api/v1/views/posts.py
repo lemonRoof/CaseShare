@@ -26,10 +26,10 @@ def get_post(id):
     except AttributeError:
         return jsonify({'error': 'Not Found'}), 404
 
-@api_views.get('/users/<string:email>/posts', strict_slashes=False)
+@api_views.get('/users/<string:id>/posts', strict_slashes=False)
 @token_required
-def get_posts_by_user(email):
-    user = storage.get(User, email)
+def get_posts_by_user(email, id):
+    user = storage.get(User, id)
     try:
         posts = user.posts
         return jsonify([post.to_dict() for post in posts]), 200
@@ -62,9 +62,9 @@ def edit_post(email, id):
         user = storage.get_user_by_email(email)
         data = request.get_json()
         post = storage.get(Post, id)
-        title = data.get('title')
-        content = data.get('content')
-        if post.user == user:
+        title = data.get('title', post.title)
+        content = data.get('content', post.content)
+        if post.user_id == user.id:
             post.title = title
             post.updated_at = datetime.now()
             post.content = content
@@ -78,11 +78,13 @@ def edit_post(email, id):
 @api_views.delete('/posts/<string:id>', strict_slashes=False)
 @token_required
 def delete_post(email, id):
-    user = storage.get(User, email)
+    user = storage.get_user_by_email(email)
     post = storage.get(Post, id)
     try:
-        if post.user == user:
+        if post.user_id == user.id:
             post.delete()
             return jsonify({}), 204
+        else:
+            return jsonify({'error': 'Forbidden'}), 403
     except AttributeError:
         return jsonify({'error': 'Not Found'}), 404
