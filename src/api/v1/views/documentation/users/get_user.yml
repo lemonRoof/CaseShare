@@ -19,5 +19,5 @@
   responses:
     200:
       description: User successfully returned
-    404:
+    400:
       description: User object not found
