@@ -23,3 +23,15 @@
 .card img {
     border-radius: 50%;
 }
+@media(max-width: 992px) {
+    #nav3 {
+        display: flex;
+        justify-content: space-around;
+    }
+    .footer {
+        display: none;
+    }
+    #nav2, #profile{
+        display: none;
+    }
+}
