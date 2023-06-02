@@ -45,12 +45,12 @@
         $("#email_error_message").hide();
         $("#password_error_message").hide();
         $("#confirm_password_error_message").hide();
-	$("#phone_error_message").hide();
+	    $("#phone_error_message").hide();
 
         var error_email = false;
         var error_password = false;
         var error_confirm_password = false;
-	var error_phone = false;
+	    var error_phone = false;
 
         $("#email").focusout(function(){
             check_email();
@@ -61,8 +61,9 @@
         $("#confirm_password").focusout(function(){
             check_confirm_password();
         });
-	$("#confirm_phone").focusout(function(){
-	    check_confirm_phone();
+	    $("#confirm_phone").focusout(function(){
+	        check_confirm_phone();
+        });
 
         function check_email() {
             var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -105,19 +106,19 @@
             }
         }
 	
-	function check_phone() {
-	    var 
+	    function check_phone() {
+        }
 
         $("#main-container").submit(function() {
             error_email = false;
             error_password = false;
             error_confirm_password = false;
-	    error_phone = false;
+	        error_phone = false;
 
             check_email();
             check_password();
             check_confirm_password();
-	    check_phone();
+	        check_phone();
 
             if (error_email === false && error_password === false && error_confirm_password === false && error_phone === false) {
                 alert("Registration Successfull");
@@ -129,6 +130,5 @@
             }
         });
     });
-
 </script>
 {% endblock %}
