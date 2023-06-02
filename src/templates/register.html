@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 {% block title %} CaseShare | Register {% endblock %}
 {% block body %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <div id="main-container" class="container mt-5">
         <div class="row justify-content-center align-items-end">
             <div class="col-12 col-lg-6 form1">
@@ -10,18 +11,22 @@
                     <div class="form-group py-2">
                         <label for="email">Email</label>
                         <input type="email" id="email" required placeholder="Enter email" class="form-control">
+			<span class="error_form" id="email_error_message"></span> 
                     </div>
                     <div class="form-group py-2">
                         <label for="password">Password</label>
                         <input type="password" id="password" required placeholder="Create Password" class="form-control">
-                    </div>
+			<span class="error_form" id="password_error_message"></span>
+		    </div>
                     <div class="form-group py-2">
                         <label for="password">Confirm Password</label>
-                        <input type="password" id="password" required placeholder="Password" class="form-control">
+                        <input type="password" id="confirm_password" required placeholder="Password" class="form-control">
+			<span class="error_form" id="confirm_password_error_message"></span>
                     </div>
                     <div class="form-group py-2">
                         <label for="phone">Mobile Number</label>
                         <input type="number" placeholder="+ (xxx) xxx xxx xxx" id="phone" class="form-control">
+			<span class="error_form" id="phone_error_message"></span>
                     </div>
                     <div class="form-group py-2">
                         <label for="title">Title</label>
@@ -34,4 +39,96 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+	    $(function() {
+
+        $("#email_error_message").hide();
+        $("#password_error_message").hide();
+        $("#confirm_password_error_message").hide();
+	$("#phone_error_message").hide();
+
+        var error_email = false;
+        var error_password = false;
+        var error_confirm_password = false;
+	var error_phone = false;
+
+        $("#email").focusout(function(){
+            check_email();
+        });
+        $("#password").focusout(function(){
+            check_password();
+        });
+        $("#confirm_password").focusout(function(){
+            check_confirm_password();
+        });
+	$("#confirm_phone").focusout(function(){
+	    check_confirm_phone();
+
+        function check_email() {
+            var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            var email = $("#email").val();
+            if (pattern.test(email) && email !== "") {
+                $("#email_error_message").hide();
+                $("#email").css("border-bottom","2px solid #34F458");
+            } else {
+                $("#email_error_massage").html("Invalid Email");
+                $("#email_error_massage").show();
+                $("#email").css("border-bottom","2px solid #F90A0A");
+                error_email = true;
+            }
+        }
+
+        function check_password() {
+            var password_length = $("#password").val().length;
+            if (password_length < 8) {
+                $("#password_error_message").html("Atleast 8 Characters");
+                $("#password_error_message").show();
+                $("#password").css("border-bottom","2px solid #F90A0A");
+                error_password = true;
+            } else {
+                $("#password_error_message").hide();
+                $("#password").css("border-bottom","2px solid #34F458");
+            }
+        }
+
+        function check_confirm_password() {
+            var password = $("#password").val();
+            var confirm_password = $("#confirm_password").val();
+            if (password != confirm_password) {
+                $("#confirm_password_error_message").html("Passwords Did not Matched");
+                $("#confirm_password_error_message").show();
+                $("#confirm_password").css("border-bottm","2px solid #F90A0A");
+                error_confirm_password = true;
+            } else {
+                $("#confirm_password_error_message").hide();
+                $("#confirm_password").css("border-bottom","2px solid #34F458");
+            }
+        }
+	
+	function check_phone() {
+	    var 
+
+        $("#main-container").submit(function() {
+            error_email = false;
+            error_password = false;
+            error_confirm_password = false;
+	    error_phone = false;
+
+            check_email();
+            check_password();
+            check_confirm_password();
+	    check_phone();
+
+            if (error_email === false && error_password === false && error_confirm_password === false && error_phone === false) {
+                alert("Registration Successfull");
+                return true;
+            } else {
+                alert("Please Fill the form Correctly");
+                return false;
+
+            }
+        });
+    });
+
+</script>
 {% endblock %}
