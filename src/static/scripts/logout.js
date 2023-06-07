@@ -1,5 +1,5 @@
-const logoutBtn = document.quarySelector(".logou-btn")
+const logout = document.quarySelector(".logout")
 
-logoutBtn.addEventListener("click",()=>{
+logout.addEventListener("click",()=>{
     window.location.replace("login.html")
 }) 
