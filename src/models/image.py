@@ -10,3 +10,4 @@ class Image(BaseModel, Base):
     filename = Column(String(100), nullable=False)
     post_id = Column(String(60), ForeignKey("posts.id"), nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+    
