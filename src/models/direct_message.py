@@ -9,3 +9,6 @@ class Direct_message(BaseModel, Base):
      content = Column(String(512), nullable=False)
      sender_id = Column(Integer, ForeignKey('users.id'), nullable=False)
      receiver_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+     images = relationship("Image", backref="user", cascade="all, delete, delete-orphan")
+     videos = relationship("Video", backref="user", cascade="all, delete, delete-orphan")
+     likes = relationship("Like", backref="user", cascade="all, delete, delete-orphan")
