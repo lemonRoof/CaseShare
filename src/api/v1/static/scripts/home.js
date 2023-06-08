@@ -43,6 +43,7 @@ $(() => {
                 headline.hide();
                 postBody.hide();
                 postField.show();
+                button.hide()
                 retrievePosts();
               }
             },
@@ -66,7 +67,7 @@ function retrievePosts() {
     dataType: 'json',
     contentType: 'application/json',
     headers: {
-      'x-token': localStorage.getItem('token')
+      'x-token': localStorage.getItem('x-token')
     },
     success: (data, statusText,resp) => {
       const postsList = $('<ul></ul>')
