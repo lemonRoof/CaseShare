@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql
+    ports:
+      -6606:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - caseShare-data:/var/lib/mysql/
+  
+  flask:
+    build: ./src
+    ports:
+      - 5000:5000
+    environment:
+      DB_URL: mysqldb://mysql/caseSharedb
+
+volumes:
+  caseShare-data

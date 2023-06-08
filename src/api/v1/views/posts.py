@@ -10,7 +10,8 @@ from models.post import Post
 from models import storage
 
 @api_views.get('/posts', strict_slashes=False)
-def get_posts():
+@token_required
+def get_posts(email):
     """Get all posts in the database."""
     posts =  storage.all(Post)
     try:
@@ -19,7 +20,8 @@ def get_posts():
         pass
 
 @api_views.get('/posts/<string:id>', strict_slashes=False)
-def get_post(id):
+@token_required
+def get_post(email, id):
     post = storage.get(Post, id)
     try:
         return jsonify(post.to_dict()), 200

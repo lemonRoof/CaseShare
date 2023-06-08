@@ -1,29 +1,56 @@
-const form = document.querySelector("form")
+$(() => {
+    const title = $('#title');
+    const email = $('#email');
+    const password = $('#password');
+    const comfirmPassword = $('#comfirmPassword');
+    const phone = $('#phone');
+    const age = $('#age');
+    const country = $('#country');
+    const first_name = $('#first_name');
+    const last_name = $('#last_name');
 
-form.addEventListener("submit",(e)=>{
-    e.preventDefault()
+    comfirmPassword.change((e) => {
+      if ($(e.target).val() !== password.val()) {
+        const label = $('<p></p>').text('Password does not match!').addClass('text-sm text-danger').attr('id', 'notMatch');
+        comfirmPassword.after(label);
+      }
+      else {
+        const label = $('<p></p>').text('Nice. Password match!').addClass('text-sm text-success').attr('id', 'match');
+        if ($('#notMatch')) {$('#notMatch').hide();}
+        comfirmPassword.after(label);
+      }
+    });
 
-    const email = form.email.value
-    const password = form.password.value
-    const confirm_password = form.confirm_password.value
-    const phone = form.phone.value
-    const title = form.title.valueOf
-	
-    const authenticated = authentication(email,password,confirm_password,phone,title)
-
-    if(authenticated){
-	    alert("correct")
-    }else{
-	    alert("wrong")
-    }
-})
-
-// function for checking email, password, confirm password, phone and title
-
-function authentication(email,password,confirm_password,phone,title){
-    if(email === "mphokekana736@gmail.com" && password === "Baker24,." && confirm_password ==="Baker24,." && phone === "0810853596" && title === "Barra"){
-	    return true
-    }else{
-	    return flase
-    }
-}
+    $('#registerForm').submit((e) => {
+      console.log('register clicked');
+      e.preventDefault();
+      $.ajax({
+        url: 'http://0.0.0.0:5001/our-apis/v1/register',
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({
+          email: email.val(),
+          password: password.val(),
+          first_name: first_name.val(),
+          last_name: last_name.val(),
+          country: country.val(),
+          age: age.val(),
+          title: title.val(),
+          phone: phone.val()
+        }),
+        success: (data, statusText, resp) => {
+          console.log(statusText);
+          if (resp.status === 201) {
+            //tell the user that the account is successfully created and redirect them to the log in page
+            const mainContainer = $('#main-container').empty();
+            mainContainer.append($('<span></span>').text('Account created successfully!'));
+            mainContainer.append($('<a></a>').attr('href', 'http://0.0.0.0:5000/login').text('  Log In Here!'));
+          }
+        },
+        error: (xhr, statusText, errorMessage) => {
+          $('#main-container').empty().text(errorMessage);
+        }
+      })
+    })
+});

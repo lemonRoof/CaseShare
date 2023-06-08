@@ -1,14 +1,15 @@
 #!/usr/bin/python
 """ holds class direct_message"""
 from .base_model import BaseModel, Base
-from sqlalchemy import Column, String, ForeignKey, Integer
+from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy.orm import relationship
 
-class Direct_message(BaseModel, Base):
+class Message(BaseModel, Base):
      """Representation of direct message"""
-     __tablename__ = "direct_messages"
+     __tablename__ = "messages"
      content = Column(String(512), nullable=False)
-     sender_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-     receiver_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-     images = relationship("Image", backref="user", cascade="all, delete, delete-orphan")
-     videos = relationship("Video", backref="user", cascade="all, delete, delete-orphan")
-     likes = relationship("Like", backref="user", cascade="all, delete, delete-orphan")
+     sender_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+     receiver_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+
+     sender = relationship("User", foreign_keys=[sender_id])
+     receiver = relationship("User", foreign_keys=[receiver_id])
