@@ -1,4 +1,5 @@
 from ..user import User
+from ..direct_message import Message
 from ..post import Post
 from ..like import Like
 from ..document import Document

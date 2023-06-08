@@ -24,8 +24,6 @@ class User(BaseModel, Base):
     likes = relationship("Like", backref="user", cascade="all, delete, delete-orphan")
     comments = relationship("Comment", backref="user", cascade="all, delete, delete-orphan")
     documents = relationship("Document", backref="user", cascade="all, delete, delete-orphan")
-    messages_sent = relationship('DirectMessage', backref="user", cascade="all, delete, delete-orphan")
-    messages_received = relationship('DirectMessage', backref="user" cascade="all, delete, delete-orphan")
 
     def __setattr__(self, __name: str, __value: Any):
         if __name == 'password':

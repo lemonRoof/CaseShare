@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This file contain views that define basic endpoints for working with
 users. These include authentication, and CRUD operations on the users table"""
-from flask import jsonify, request
+from flask import jsonify, request, redirect, make_response
 import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 from os import environ
@@ -29,7 +29,10 @@ def login():
         if check_password_hash(user.password, auth.get('password')):
             # information is valid and user exists
             token = jwt.encode({'email': auth.get('email'), 'exp': datetime.utcnow() + timedelta(hours=24)}, SECRET_KEY)
-            return jsonify({'token': token}), 200
+            response = make_response(jsonify(
+                {'token': token, 'redirectUrl': 'http://0.0.0.0:5001/home'}
+                ), 200)
+            return response
         else:
             return jsonify({'error': 'Invalid password'}), 400
     except Exception:

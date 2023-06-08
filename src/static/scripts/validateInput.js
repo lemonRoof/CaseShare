@@ -1,8 +1,3 @@
-{% extends 'layout.html' %}
-{% block title %} CaseShare | Log In {% endblock %}
-{% block body %}
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
 
 	    function check_email() {
                 var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -54,26 +49,3 @@
 		    check_password();
 	    });
     });
-	</script>
-    <div id="main-container" class="container bg-light mt-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-6 form1">
-                <h3>Sign In</h3>
-                <p>Sign in  today for a better experience</p>
-                <form class="form formLogin">
-                    <div class="form-group py-2">
-                        <label for="email">Email</label>
-                        <input type="email" autocomplete="email" autofocus id="email" placeholder="Enter email" class="form-control">
-                    </div>
-                    <div class="form-group py-2">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" autocomplete="password" placeholder="password" class="form-control">
-                    </div>
-                    <div class="py-3">
-                        <button class="btn btn-sm btn-success" type="submit">Sign In</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-{% endblock %}

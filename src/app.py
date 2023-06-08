@@ -2,7 +2,7 @@
 """
 This file contains a python
 """
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 
 app = Flask(__name__)
 
@@ -18,6 +18,7 @@ def login():
 def register():
     return render_template('register.html')
 
+<<<<<<< HEAD
 @app.get('/logout', strict_slashes=False)
 def logout():
     return render_template('logout.html')
@@ -30,3 +31,9 @@ def features():
 def about_us():
     return render_template('about_us.html')
 
+@app.after_request
+def add_cors_headers(response):
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type,Accepts,Authorization,x-token,x-requested-with")
+    response.headers.add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE")
+    return response
