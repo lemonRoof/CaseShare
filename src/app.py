@@ -18,7 +18,6 @@ def login():
 def register():
     return render_template('register.html')
 
-<<<<<<< HEAD
 @app.get('/logout', strict_slashes=False)
 def logout():
     return render_template('logout.html')
