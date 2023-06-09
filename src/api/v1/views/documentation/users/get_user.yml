@@ -1,0 +1,23 @@
+  get a profile of another user
+  ---
+  tags:
+    - Users
+  parameters:
+    - name: x-token
+      in: header
+      schema:
+        type: string
+        format: jwt
+        required: true
+    - name: id
+      in: path
+      properties:
+        type: string
+        format: uuid
+        required: true
+
+  responses:
+    200:
+      description: User successfully returned
+    400:
+      description: User object not found

@@ -1,0 +1,15 @@
+  get all users in the database
+  ---
+  tags:
+    - Users
+  parameters:
+    - name: x-token
+      in: header
+      schema:
+        type: string
+        format: jwt
+        required: true
+
+  responses:
+    200:
+      description: Users successfully returned
