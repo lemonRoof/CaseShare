@@ -5,4 +5,3 @@ pip install sqlalchemy
 pip install flasksqlalchemy
 pip install uuid
 pip install gunicorn
-pip install -r requirements.txt
