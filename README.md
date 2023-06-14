@@ -78,6 +78,15 @@ Open your web browser and visit (http://localhost:5000) to access the CaseShare 
 
 ### Usage
 
+### Contributing
+We welcome contributions to enhance the functionality, features, and user experience of the Sisters Luxe Jewelry website. If you're interested in contributing, please follow the guidelines outlined in our Github.
+
+### License
+The CaseShare Website is open-source software licensed under the Github.
+
+### Related projects
+
+
 
 
 ### The Context
