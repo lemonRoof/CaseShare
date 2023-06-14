@@ -1,3 +1,6 @@
+#This JSON object represents a configuration setting for a server. 
+#The key "liveServer.settings.port" suggests that it is specifying the port number for a live server. 
+#The corresponding value, 5502, indicates that the server should listen on port 5502.
 {
     "liveServer.settings.port": 5502
 }
