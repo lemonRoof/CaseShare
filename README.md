@@ -1,4 +1,5 @@
 # CaseShare
+![bbb](https://github.com/mphokekana/CaseShare/assets/111887473/6e2db378-2d1a-4c3a-ad8c-b52bbf2be34f)
 
 ### The Project
 
@@ -97,6 +98,7 @@ We welcome contributions to enhance the functionality, features, and user experi
 ### License
 
 The CaseShare Website is open-source software licensed under the Github.
+![aaa1](https://github.com/mphokekana/CaseShare/assets/111887473/bf7c998a-504b-4dc6-a615-06c7850cd6a9)
 
 ### Related projects
 
@@ -120,5 +122,29 @@ We were tasked to come up with a project we wanted to work on, and went through 
 - [Uwimana Lowami](https://github.com/Sonlowami) - Medical Imaging Student at University of Rwanda, and talented Software Engineer. He is a passionate learner, and wants to improve the quality of healthcare using technology.
 
 - [Mpho Kekana](https://github.com/mphokekana) - Talented Software Engineer who lives in Johannesburg,South Africa.
+
+### My Social Platform Website Deployment Journey
+Introduction
+Welcome to the README file of my social platform website deployment journey! This document aims to provide an emotional and sentimental account of the technical challenge I faced during the deployment phase of my Flask-based social platform website. It highlights the obstacles I encountered, the perseverance I exhibited, and the invaluable support I received from my peers that ultimately led to a successful deployment on render.com.
+
+The Obstacle
+As I embarked on the journey of deploying my social platform website, I encountered a significant hurdle that seemed insurmountable. Despite my meticulous planning and countless hours of debugging, I found myself unable to deploy the website successfully. It was disheartening to witness my hard work come to a standstill, as my vision of connecting individuals through this platform was put on hold.
+
+Perseverance and Resilience
+However, in the face of adversity, I refused to give up. I knew that challenges are an integral part of any technical project, and true growth lies in finding solutions to these roadblocks. With a renewed determination, I delved into online forums, documentation, and tutorials, hoping to find a breakthrough that would breathe life into my vision.
+
+A Serendipitous Encounter
+During this critical juncture, fate intervened in the form of a peer who had experienced a similar deployment challenge. Through the vast network of developers and the power of community, I connected with this peer, who generously shared their experience and knowledge. It was a serendipitous encounter that revitalized my hope and infused me with the belief that together, we could overcome any obstacle.
+
+The Turning Point
+As I engaged in a conversation with my newfound peer, they shared their successful deployment story on render.com. Their passion for helping others and their willingness to guide me through the intricacies of the deployment process were truly remarkable. Their words of encouragement instilled in me a sense of camaraderie and propelled me to take the leap of faith towards deploying my social platform on render.com.
+
+Triumph and Gratitude
+Thanks to the guidance and support of my peer, I successfully deployed my social platform website on render.com. The feeling of accomplishment and elation was indescribable. It was a testament to the power of collaboration, the strength of the developer community, and the resilience of the human spirit.
+
+Conclusion
+This README serves as a testament to the challenges faced, the resilience exhibited, and the triumph achieved during my social platform website deployment journey. It reflects the emotional rollercoaster that every developer experiences and showcases the value of seeking support from peers. I am forever grateful to the developer community for fostering an environment of learning, growth, and shared success.
+
+Thank you for taking the time to read this heartfelt account. I hope it resonates with hiring managers who understand that the true measure of a developer extends beyond technical skills and encompasses the ability to overcome obstacles, collaborate effectively, and contribute meaningfully to the tech community.
 
 
